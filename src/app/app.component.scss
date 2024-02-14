@@ -1,0 +1,40 @@
+.app {
+    padding: 20px 40px;
+
+    &__search {
+        input {
+            background-color: #fff;
+            height: 30px;
+            line-height: 20px;
+            font-size: 16px;
+            border: none;
+            min-width: 300px;
+            padding: 0 10px;
+        }
+    }
+
+    &__cards {
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 20px;
+        justify-content: space-between;
+
+        app-card {
+            width: calc(33% - 20px);
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    app-card {
+      width: calc(50% - 20px);
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    app-card {
+      width: calc(100% - 20px);
+    }
+  }

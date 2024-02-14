@@ -1,0 +1,8 @@
+<div class="app">
+    <div class="app__search">
+        <input type="text" placeholder="Enter">
+    </div>
+    <div class="app__cards">
+        <app-card *ngFor="let card of cards$ | async" [data]="card"></app-card>
+    <div>
+</div>
