@@ -1,0 +1,11 @@
+.error {
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__message {
+        text-align: center;
+        font-size: 22px;
+    }
+}

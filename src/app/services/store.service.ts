@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {ICardData} from '../shared/app.interfaces';
+import {ICardData, IReponseDataItem} from '../shared/app.interfaces';
 import {ApiService} from './api.service';
 
 @Injectable({
@@ -15,15 +15,25 @@ export class StoreService {
         private apiService: ApiService
     ) { }
 
-    public init(): void {
-        this.apiService.getPictures().subscribe(resp => {
-            console.log(resp);
-            this.cards.next(resp.data.map(item => ({
-                id: item.id,
-                title: item.title,
-                date: item.import_datetime,
-                img: item.images.original.url
-            })))
-        })
+    public trends(): void {
+        this.apiService.getPictures().pipe(
+        ).subscribe(resp => {
+            this.setNewCards(resp.data);
+        });
+    }
+
+    public search(str: string): void {
+        this.apiService.getSearchablePictures(str).subscribe(resp => {
+            this.setNewCards(resp.data);
+        });
+    }
+
+    private setNewCards(data: IReponseDataItem[]): void {
+        this.cards.next(data.map(item => ({
+            id: item.id,
+            title: item.title,
+            date: item.import_datetime,
+            img: item.images.original.url
+        })));
     }
 }

@@ -1,7 +1,10 @@
 <div class="card">
-    <div class="card__img">
-        <img [src]="data.img">
+    <div class="card__wrapper" [hidden]="isLoader">
+        <div class="card__img">
+            <img [src]="data.img" (load)="imageLoaded()">
+        </div>
+        <div class="card__date">{{data.date}}</div>
+        <div class="card__title">{{data.title}}</div>
     </div>
-    <div class="card__date">{{data.date}}</div>
-    <div class="card__title">{{data.title}}</div>
+    <app-loader *ngIf="isLoader" [isSmall]="true"></app-loader>
 </div>

@@ -1,8 +1,12 @@
 <div class="app">
     <div class="app__search">
-        <input type="text" placeholder="Enter">
+        <input type="text" placeholder="Enter" [formControl]="searchControl">
     </div>
-    <div class="app__cards">
+    <div *ngIf="!(isLoader$ | async); else loader" class="app__cards">
         <app-card *ngFor="let card of cards$ | async" [data]="card"></app-card>
-    <div>
+    </div>
+    <ng-template #loader>
+        <app-loader></app-loader>
+    </ng-template>
+    <app-error *ngIf="isError$ | async"></app-error>
 </div>
