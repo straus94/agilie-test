@@ -1,4 +1,4 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {IResponseTrending} from '../shared/app.interfaces';
@@ -17,10 +17,19 @@ export class ApiService {
     ) { }
 
     public getPictures(): Observable<IResponseTrending> {
-        return this.http.get<IResponseTrending>(`${this.DOMAIN}trending?api_key=${this.API_KEY}&limit=${this.LIMIT}`);
+        const params = new HttpParams()
+            .set('api_key', this.API_KEY)
+            .set('limit', this.LIMIT.toString());
+
+        return this.http.get<IResponseTrending>(`${this.DOMAIN}trending`, {params});
     }
 
     public getSearchablePictures(str: string): Observable<IResponseTrending> {
-        return this.http.get<any>(`${this.DOMAIN}search?api_key=${this.API_KEY}&limit=${this.LIMIT}&q=${str}`);
+        const params = new HttpParams()
+            .set('api_key', this.API_KEY)
+            .set('limit', this.LIMIT.toString())
+            .set('q', str);
+
+        return this.http.get<any>(`${this.DOMAIN}search`, {params});
     }
 }
