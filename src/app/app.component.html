@@ -2,11 +2,25 @@
     <div class="app__search">
         <input type="text" placeholder="Enter" [formControl]="searchControl">
     </div>
-    <div *ngIf="!(isLoader$ | async); else loader" class="app__cards">
-        <app-card *ngFor="let card of cards$ | async" [data]="card"></app-card>
-    </div>
+    <ng-container *ngIf="!(isLoader$ | async); else loader">
+        <app-error *ngIf="isError$ | async; else content"></app-error>
+        <ng-template #content>
+            <div *ngIf="(cards$ | async).length; else empty" class="app__cards">
+                <ng-container >
+                    <app-card *ngFor="let card of cards$ | async" [data]="card"></app-card>
+                </ng-container>
+
+            </div>
+            <ng-template #empty>
+                <div class="app__empty">
+                    No results
+                </div>
+            </ng-template>
+        </ng-template>
+    </ng-container>
     <ng-template #loader>
         <app-loader></app-loader>
     </ng-template>
-    <app-error *ngIf="isError$ | async"></app-error>
+
+
 </div>

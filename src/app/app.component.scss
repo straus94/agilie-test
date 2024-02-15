@@ -21,6 +21,15 @@
         grid-template-columns: repeat(auto-fill, minmax(calc(33.33% - 20px), 1fr));
         grid-gap: 20px;
     }
+
+    &__empty {
+        font-size: 22px;
+        height: 300px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 @media screen and (max-width: 1200px) {
